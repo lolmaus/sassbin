@@ -1,0 +1,18 @@
+.editor {
+    width: 100%;
+    height: 30em;
+}
+
+.html, .css {
+    width: 48%;
+    float: left;
+}
+.css {
+    margin-left: 4%;
+}
+
+#input:after {
+    content: "";
+    display: table;
+    clear: both;
+}
