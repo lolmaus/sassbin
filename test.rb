@@ -1,25 +1,40 @@
 require 'bundler/setup'
 require 'sinatra'
+
+set :environment, :development
 require 'sinatra/reloader' if development?
 require 'sass'
 require 'haml'
+
+require 'compass'
+require 'breakpoint-slicer'
 
 get '/' do
   haml :index
 end
 
-post '/result' do
-  @html = params[:html]
-  #@css =  params[:css]
+get '/ajax' do
+  haml :ajax
+end
 
+post '/result' do
+
+  @html = params[:html]
+  @css =  params[:css]
+
+  haml :result
+
+end
+
+
+post '/compile-sass' do
+
+  sass = params[:sass]
 
   begin
-    @css = sass(params[:css].chomp, {:style => :nested, :quiet => true})
-
+    sass(sass.chomp, {:style => :nested, :quiet => true})
   rescue Sass::SyntaxError => e
     status 200
     e.to_s
-  end
-
-  haml :result, layout: false
+  end if sass
 end

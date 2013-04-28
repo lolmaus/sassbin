@@ -4,3 +4,6 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'haml'
 gem 'sass'
+
+gem 'compass'
+gem 'breakpoint-slicer'
