@@ -9,13 +9,22 @@ require 'haml'
 require 'compass'
 require 'breakpoint-slicer'
 
+
+Compass.sass_engine_options[:load_paths].each do |path|
+  Sass.load_paths << path
+end
+
+
+
 get '/' do
   haml :index
 end
 
+
 get '/ajax' do
   haml :ajax
 end
+
 
 post '/result' do
 
@@ -28,7 +37,6 @@ end
 
 
 post '/compile-sass' do
-
   sass = params[:sass]
 
   begin
