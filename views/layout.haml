@@ -4,7 +4,7 @@
     %title My Sinatra Website
     -# Own CSS
     %link{rel: "stylesheet",
-          href: "css/style.css"}
+          href: "/css/style.css"}
     -# jQuery
     %script{src:      "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js",
             type:     "text/javascript",
@@ -25,9 +25,9 @@
     #main
       = yield
     -# Own JS
-    %script{src:      "js/controls.js",
+    %script{src:      "/js/controls.js",
             type:     "text/javascript",
             charset:  "utf-8" }
-    %script{src:      "js/output.js",
+    %script{src:      "/js/output.js",
             type:     "text/javascript",
             charset:  "utf-8" }

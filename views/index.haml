@@ -2,11 +2,11 @@
 %section#pane-html.pane.is-active
   %header
     %h2 HTML
-  #editor-html.editor
+  #editor-html.editor= @html
 %section#pane-sass.pane.is-active
   %header
     %h2 SASS
-  #editor-sass.editor
+  #editor-sass.editor= flatten @sass
 %section#pane-css.pane.is-active
   %header
     %h2 Compiled CSS

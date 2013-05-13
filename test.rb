@@ -68,8 +68,9 @@ post '/compile-sass' do
 end
 
 
-#get '/gist/:bla' do
-#  puts "YAY:"
-#  files = @github.gists.get(params[:bla]).files
-#  files["#{files.keys.grep(/.+\.(html|htm)/)[0]}"].content
-#end
+get '/gist/:gist_id' do
+  files = @github.gists.get(params[:gist_id]).files
+  @html = files["#{files.keys.grep(/.+\.(html|htm)/)[0]}"].content
+  @sass = files["#{files.keys.grep(/.+\.(sass|scss|css)/)[0]}"].content
+  haml :index
+end

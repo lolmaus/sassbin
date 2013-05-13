@@ -1,5 +1,5 @@
 %h1#site-title SassBin
-#controls
+#pane-controls
   %label
     %input{type: 'checkbox', name: 'pane-html', checked: true} HTML
   %label
@@ -9,3 +9,7 @@
   %label
     %input{type: 'checkbox', name: 'pane-output', checked: true} Output
   %button#equalize |<->|
+#gist-controls
+  %ul
+    %li
+      %a#load-gist{href: "/gist/5567591"} Load gist

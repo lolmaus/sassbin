@@ -103,6 +103,9 @@ function compileSass() {
 }
 
 
+// Compile SASS to CSS on page load
+compileSass();
+
 // Compile SASS to CSS on change
 // binding to changes in SASS textbox
 editorSass.getSession().on("change", function () {

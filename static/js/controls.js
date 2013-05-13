@@ -1,7 +1,11 @@
 //Object.prototype.ppp = function() { console.log(this); return this; }
 
-function percentage(fraction, total) {
-    return fraction / total * 100 + "%";
+function percentage(value) {
+    return value * 100 + "%";
+}
+
+function percentageOf(fraction, total) {
+    return percentage(fraction / total);
 }
 
 function nextPaneMaxWidth(currentPaneObject) {
@@ -9,6 +13,22 @@ function nextPaneMaxWidth(currentPaneObject) {
     var nextPaneWidth = $(currentPaneObject).nextAll(':visible:first').width();
     var maxWidth = currentPaneWidth + nextPaneWidth - 100;
     return maxWidth;
+}
+
+function resetPanes() {
+    var visiblePanes = $('.pane:visible');
+    var visiblePanesAmount =  visiblePanes.length;
+    var paneNewWidth = 1 / visiblePanesAmount;
+
+    visiblePanes.removeAttr('style');
+    visiblePanes.each(function( index ) {
+        $(this).css({
+           left: percentage(paneNewWidth * index),
+           right: percentage(1 - (paneNewWidth * (index +1)))
+        });
+//        left: $pane-width * ($i - 1)
+//        right: 100% - ($pane-width * $i)
+    });
 }
 
 //var currentPaneOriginalWidth = 0; // Has to be declared outside applyResizableToPanes()
@@ -44,11 +64,11 @@ function applyResizableToPanes() {
                 var thisPaneOriginalLeft = ui.originalPosition['left'];
 
                 var thisPaneNewRight = parentWidth - (thisPaneOriginalLeft + thisPaneNewWidth);
-                var thisPaneNewRightRelative = percentage(thisPaneNewRight,parentWidth);
+                var thisPaneNewRightRelative = percentageOf(thisPaneNewRight,parentWidth);
 
                 var nextPaneOriginalLeft = thisPaneOriginalLeft + thisPaneOriginalWidth;
                 var nextPaneNewLeft = nextPaneOriginalLeft + thisPaneDelta;
-                var nextPaneNewLeftRelative = percentage(nextPaneNewLeft, parentWidth);
+                var nextPaneNewLeftRelative = percentageOf(nextPaneNewLeft, parentWidth);
 
                 // Resizing current pane using the `right` css attribute instead of `width`
                 ui.element.css({
@@ -77,6 +97,29 @@ function applyResizableToPanes() {
 };
 
 applyResizableToPanes();
+
+// Enabling all checkboxes
+$("#controls input").prop('checked', true);
+
+// Reacting to toggling checkboxes
+$("#controls input").change(function() {
+    var target = "#" + $(this).attr('name');
+    var status = $(this).is(':checked');
+
+    if (status) {
+        $(target).addClass('is-active');
+        $(target).removeClass('is-inactive');
+    } else {
+        $(target).removeClass('is-active');
+        $(target).addClass('is-inactive');
+    }
+    resetPanes();
+});
+
+$('#equalize').click(function(){
+    // Reset panes' sizes
+    resetPanes();
+});
 
 //function stretchPanesToFullWidth() {
 //    var containerWidth = $("#main").width();
