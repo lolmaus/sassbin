@@ -1,57 +1,19 @@
-#input
-  %form{method: 'post', action: '/result', target: 'output'}
-
-    .html
-      %h2 HTML
-      #editor-html.editor
-      %textarea{name: 'html'}= @html
-
-    .css
-      %h2 CSS
-      #editor-css.editor
-      %textarea{name: 'css'}= @css
-
-    %input#submit{type: 'submit'}
-
-  #output{style: 'display: none'}
-    %h1 Output
-    %iframe.editor{name: 'output'}
-
-
-
-%script{src:      "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js",
-        type:     "text/javascript",
-        charset:  "utf-8" }
-%script{src:      "http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js",
-        type:     "text/javascript",
-        charset:  "utf-8" }
-
-:javascript
-  // Loading the Ace editor
-  var editorHtml = ace.edit("editor-html");
-  editorHtml.setTheme("ace/theme/github");
-  editorHtml.getSession().setMode("ace/mode/html");
-
-  var editorCss = ace.edit("editor-css");
-  editorCss.setTheme("ace/theme/github");
-  editorCss.getSession().setMode("ace/mode/css");
-
-  // Copying text from Ace to a textarea as you type
-  var textareaHtml = $('textarea[name="html"]').hide();
-  editorHtml.getSession().setValue(textareaHtml.val());
-  editorHtml.getSession().on("change", function () {
-      textareaHtml.val(editorHtml.getSession().getValue());
-  });
-  var textareaCss = $('textarea[name="css"]').hide();
-  editorCss.getSession().setValue(textareaCss.val());
-  editorCss.getSession().on("change", function () {
-      textareaCss.val(editorCss.getSession().getValue());
-  });
-
-  // Catching the click
-  output = $('#output');
-  //output.hide();
-
-  $('#submit').click(function() {
-     output.show();
-  });
+-##pane-container
+%section#pane-html.pane.is-active
+  %header
+    %h2 HTML
+  #editor-html.editor
+%section#pane-sass.pane.is-active
+  %header
+    %h2 SASS
+  #editor-sass.editor
+%section#pane-css.pane.is-active
+  %header
+    %h2 Compiled CSS
+  #editor-css.editor
+%section#pane-output.pane.is-active
+  %header
+    %h2 Output
+  .editor
+    %iframe#output{name: 'output'}
+    #output-overlay

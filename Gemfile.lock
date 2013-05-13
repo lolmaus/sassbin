@@ -15,9 +15,32 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     eventmachine (1.0.3-x86-mingw32)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
     fssm (0.2.10)
+    github_api (0.9.7)
+      faraday (~> 0.8.1)
+      hashie (>= 1.2)
+      multi_json (~> 1.4)
+      nokogiri (~> 1.5.2)
+      oauth2
     haml (4.0.2)
       tilt
+    hashie (2.0.4)
+    httpauth (0.2.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
+    multi_json (1.7.2)
+    multi_xml (0.5.3)
+    multipart-post (1.2.0)
+    nokogiri (1.5.9-x86-mingw32)
+    oauth2 (0.9.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -43,6 +66,7 @@ PLATFORMS
 DEPENDENCIES
   breakpoint-slicer
   compass
+  github_api
   haml
   sass
   sinatra

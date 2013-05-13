@@ -2,6 +2,32 @@
 %html
   %head
     %title My Sinatra Website
-    %link(rel="stylesheet" href="css/style.css")
+    -# Own CSS
+    %link{rel: "stylesheet",
+          href: "css/style.css"}
+    -# jQuery
+    %script{src:      "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js",
+            type:     "text/javascript",
+            charset:  "utf-8" }
+    -# jQuery UI
+    %script{src:      "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js",
+            type:     "text/javascript",
+            charset:  "utf-8" }
+    %link{rel: "stylesheet",
+          href: "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery-ui.css"}
+    -# ACE Editor
+    %script{src:      "https://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js",
+            type:     "text/javascript",
+            charset:  "utf-8" }
   %body
-    = yield
+    %header#header
+      = haml :'shared/header'
+    #main
+      = yield
+    -# Own JS
+    %script{src:      "js/controls.js",
+            type:     "text/javascript",
+            charset:  "utf-8" }
+    %script{src:      "js/output.js",
+            type:     "text/javascript",
+            charset:  "utf-8" }
