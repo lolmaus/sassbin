@@ -86,7 +86,7 @@ get '/gist/:gist_id' do
     sass_file = files["#{files.keys.grep(/.+\.(sass|scss|css)/)[0]}"]
     if sass_file
       @sass = sass_file.content
-      @sass_flavor = File.extname(sass_file.filename)[1..-1]
+      @sass_flavor = File.extname(sass_file.filename)[1..-1] == 'sass' ? 'sass' : 'scss'
     end
   rescue
     status 200
