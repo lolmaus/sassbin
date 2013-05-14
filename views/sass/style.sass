@@ -21,6 +21,9 @@ $header-height: 35px
   @extend %stretch
   bottom: none
   height: $header-height
+  line-height: $header-height
+
+  vertical-align: middle
 
   & > *
     display: inline-block
@@ -45,11 +48,14 @@ $header-height: 35px
   &:not(:last-child)
     border-right: 3px ridge grey
 
-  $pane-header-height: 20px
+  $pane-header-height: 25px
   header
     @extend %stretch
     bottom: none
     height: $pane-header-height
+    line-height: $pane-header-height
+
+    vertical-align: middle
 
     & > *
       display: inline-block
