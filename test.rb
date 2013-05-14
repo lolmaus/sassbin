@@ -44,7 +44,7 @@ before do
   @gist_input = ''
 end
 
-# compiling CSS files
+# compiling internal SASS to CSS
 get '/css/:name.css' do
   content_type 'text/css', :charset => 'utf-8'
   sass(:"sass/#{params[:name]}", Compass.sass_engine_options )
@@ -57,20 +57,42 @@ end
 
 
 post '/compile-sass' do
-  sass = params[:sass]
+  sass_code = params[:sass_code]
+  sass_flavor = params[:sass_flavor]
+  css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
+  puts params[:css_flavor]
 
   begin
-    sass(sass.chomp, {:style => :nested, :quiet => true})
+    if sass_flavor == 'sass'
+      sass(sass_code.chomp, {style: css_flavor, quiet: true, cache: false})
+    else
+      scss(sass_code.chomp, {style: css_flavor, quiet: true, cache: false})
+    end
+
   rescue Sass::SyntaxError => e
     status 200
     e.to_s
-  end if sass
+  end if sass_code
 end
 
 
 get '/gist/:gist_id' do
-  files = @github.gists.get(params[:gist_id]).files
-  @html = files["#{files.keys.grep(/.+\.(html|htm)/)[0]}"].content
-  @sass = files["#{files.keys.grep(/.+\.(sass|scss|css)/)[0]}"].content
+  begin
+    files = @github.gists.get(params[:gist_id]).files
+
+    html_file = files["#{files.keys.grep(/.+\.(html|htm)/)[0]}"]
+    @html = html_file.content if html_file
+
+    sass_file = files["#{files.keys.grep(/.+\.(sass|scss|css)/)[0]}"]
+    if sass_file
+      @sass = sass_file.content
+      @sass_flavor = File.extname(sass_file.filename)[1..-1]
+    end
+  rescue
+    status 200
+
+    @html = "<i>Gist #{params[:gist_id]} was not found. :(</i>"
+  end
+
   haml :index
 end

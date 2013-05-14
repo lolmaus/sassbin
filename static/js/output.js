@@ -2,10 +2,10 @@
 var editorHtml = ace.edit("editor-html");
 editorHtml.setTheme("ace/theme/github");
 editorHtml.getSession().setMode("ace/mode/html");
+editorHtml.getSession().setValue($('#editor-html-stunt-double').text());
 
 var editorSass = ace.edit("editor-sass");
 editorSass.setTheme("ace/theme/github");
-editorSass.getSession().setMode("ace/mode/sass");
 editorSass.getSession().setMode("ace/mode/sass");
 
 var editorCss = ace.edit("editor-css");
@@ -70,7 +70,9 @@ function compileHtml() {
 var requestSass; // variable to hold request
 // Compile SASS to CSS
 function compileSass() {
-    var sass = editorSass.getSession().getValue();
+    var sassCode = editorSass.getSession().getValue();
+    var sassFlavor = $('#sass-flavor :selected').prop('value');
+    var cssFlavor = $('#css-flavor :selected').prop('value');
     var css = null;
 
     // abort any pending requestSass
@@ -82,7 +84,9 @@ function compileSass() {
     var requestSass = $.ajax({
         url: '/compile-sass',
         type: 'POST',
-        data: {'sass': sass}
+        data: { 'sass_code': sassCode,
+                'sass_flavor': sassFlavor,
+                'css_flavor': cssFlavor }
     });
 
     // callback handler that will be called on success
@@ -109,6 +113,11 @@ compileSass();
 // Compile SASS to CSS on change
 // binding to changes in SASS textbox
 editorSass.getSession().on("change", function () {
+    compileSass();
+});
+
+// Compile SASS on flavor change
+$('.flavor').change(function() {
     compileSass();
 });
 

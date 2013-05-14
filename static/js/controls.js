@@ -96,14 +96,27 @@ function applyResizableToPanes() {
     });
 };
 
+function promptGist(message) {
+  var usersInput = prompt(message);
+
+  if (usersInput) {
+      var regexForNumber = /^[\da-f]+$/;
+      if(regexForNumber.test(usersInput)) {
+          return usersInput;
+      } else {
+          promptGist("Wrong number provided. Please provide a Gist gist ID number. It’s usually a longish number like 29388372.");
+      }
+  }
+};
+
 applyResizableToPanes();
 
 // Enabling all checkboxes
-$("#controls input").prop('checked', true);
-
+$("#pane-controls input").prop('checked', true);
 // Reacting to toggling checkboxes
-$("#controls input").change(function() {
-    var target = "#" + $(this).attr('name');
+$("#pane-controls input").change(function() {
+    console.log("yay");
+    var target = "#" + $(this).prop('name');
     var status = $(this).is(':checked');
 
     if (status) {
@@ -121,115 +134,14 @@ $('#equalize').click(function(){
     resetPanes();
 });
 
-//function stretchPanesToFullWidth() {
-//    var containerWidth = $("#main").width();
-//
-//    // Calculating the initial width of all panes
-//    var initialPanesWidth = 0;
-//    $(".pane:visible").each(function(index){
-//        initialPanesWidth = initialPanesWidth + $(this).outerWidth();
-//    });
-//
-//    // Adjusting each pane's width
-//    var newPanesWidth = 0;
-//    $(".pane:visible").each(function(index){
-//
-//        // Setting width
-//        var currentPaneRelativeWidth = $(this).outerWidth() / initialPanesWidth;
-//        var currentPaneNewAbsoluteWidth = Math.floor(currentPaneRelativeWidth * containerWidth);
-//        $(this).outerWidth(currentPaneNewAbsoluteWidth);
-//        newPanesWidth = newPanesWidth + currentPaneNewAbsoluteWidth;
-//
-////        // Setting height
-////        var parentHeight = $(this).parent().height();
-////        $(this).outerHeight(parentHeight);
-////
-////        // Setting height for editor
-////        var paneHeight = $(this).height();
-////        var headerHeight = $(this).find('header').outerHeight();
-////        var editorHeight = paneHeight - headerHeight;
-////        console.log(editorHeight);
-////        $(this).find('.editor').outerHeight(editorHeight);
-//    });
-//
-//    // Filling a possible gap that could appear due to rounding down
-//    if (newPanesWidth < containerWidth) {
-//        var lastPaneWidth = $(".pane:visible:last-child").outerWidth();
-//        //     console.log("bla" + lastPaneWidth);
-//        $(".pane:visible:last-child").outerWidth(lastPaneWidth + 1);
-//    }
-//
-//    var currentPaneOriginalWidth = 0; // This var should be globally available for applyResizableToPanes() to work
-//    applyResizableToPanes();
-//}
-//
-//function nextPaneMaxWidth(object) {
-//    var currentPaneWidth = $(object).outerWidth();
-//    var nextPaneWidth = $(object).nextAll(':visible:first').width();
-//    var maxWidth = currentPaneWidth + nextPaneWidth - 100;
-//    return maxWidth;
-//}
-//
-//function applyResizableToPanes() {
-//    $(".pane").not(':last-child').each(function( index ) {
-//        $(this).resizable({
-//            helper: 'ui-resizable-helper',
-//            handles: 'e',
-//            minWidth: 100,
-//            maxWidth: nextPaneMaxWidth(this),
-//
-//            start: function(event, ui){
-//                currentPaneOriginalWidth = $(this).outerWidth();
-//            },
-//
-//            stop: function(event, ui){
-//                var currentPaneNewWidth = $(this).outerWidth();
-//                var widthDelta = currentPaneOriginalWidth - currentPaneNewWidth;
-//
-//                var nextPane = $(this).nextAll(':visible:first');
-//
-//
-//                var nextPaneOriginalWidth = nextPane.outerWidth();
-//                var nextPaneNewWidth = Math.floor(nextPaneOriginalWidth + widthDelta);
-//                nextPane.outerWidth(nextPaneNewWidth);
-//
-//                // Fix for http://bugs.jqueryui.com/ticket/4152
-//                $(this).height('auto');
-//
-//                // Reapplying to recalculate maxWidth
-//                applyResizableToPanes();
-//
-//            }
-//        });
-//    });
-//}
-//
-////$(document).ready(function(){
-////
-////});
-//
-//stretchPanesToFullWidth();
-//
-//$(window).resize(function() {
-//    stretchPanesToFullWidth();
-//});
-//
-//$("#controls input").change(function() {
-//    console.log("changed");
-//    var target = "#" + $(this).prop('name');
-//    var status = $(this).is(':checked');
-//
-//    if (status) {
-//        $(target).addClass('is-active');
-//    } else {
-//        $(target).removeClass('is-active');
-//    }
-//
-//    stretchPanesToFullWidth();
-//});
-//
-//$('#equalize').click(function(){
-//    // Reset panes' sizes
-//    $('.pane').outerWidth(100);
-//    stretchPanesToFullWidth();
-//});
+
+
+//Loading a Gist
+$('#load-gist').click(function(e) {
+    e.preventDefault();
+
+    var gistId = promptGist("Please provide a Gist gist ID number. It’s usually a longish number like 29388372.");
+    if (gistId) {
+        window.open ('/gist/' + gistId,'_self',false);
+    }
+});

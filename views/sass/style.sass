@@ -51,6 +51,11 @@ $header-height: 35px
     bottom: none
     height: $pane-header-height
 
+    & > *
+      display: inline-block
+    .flavor
+      float: right
+
   .editor
     @extend %stretch
     top: $pane-header-height + 1
@@ -74,9 +79,6 @@ $pane-width: 100% / $panes-amount
     left: $pane-width * ($i - 1)
     right: 100% - ($pane-width * $i)
     background-color: rgba(nth(lightblue pink lemonchiffon greenyellow, $i),.25)
-
-
-
 
 .is-active
   display: block
