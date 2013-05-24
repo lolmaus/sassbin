@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48c2e1a2-95ea-4db0-a567-ea5e770c5742" name="Default" comment="" />
+    <list default="true" id="48c2e1a2-95ea-4db0-a567-ea5e770c5742" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="sassbin.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/app.rb" changelist="48c2e1a2-95ea-4db0-a567-ea5e770c5742" time="1369410985018" ignored="false" />
@@ -167,7 +170,7 @@
       <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0">
+            <state line="1" column="19" selection-start="31" selection-end="31" vertical-scroll-proportion="0.03244275">
               <folding />
             </state>
           </provider>
@@ -852,7 +855,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0">
+        <state line="1" column="19" selection-start="31" selection-end="31" vertical-scroll-proportion="0.03244275">
           <folding />
         </state>
       </provider>
