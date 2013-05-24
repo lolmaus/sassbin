@@ -1,0 +1,41 @@
+%h1#site-title SassBin
+#pane-controls
+  -#%ul.tristate
+  -#  %li#checkbox-group-input
+  -#    %input#checkbox-input.checkbox-group{type: 'checkbox', checked: true}
+  -#    %label{for: 'checkbox-input'} Input
+  -#    %ul
+  -#      %li
+  -#        %input#checkbox-pane-html.checkbox-pane{type: 'checkbox', name: 'pane-html', checked: true}
+  -#        %label{for: 'checkbox-pane-html'} HTML
+  -#      %li
+  -#        %input#checkbox-pane-sass.checkbox-pane{type: 'checkbox', name: 'pane-sass', checked: true}
+  -#        %label{for: 'checkbox-pane-sass'} SASS
+  -#  %li#checkbox-group-output
+  -#    %input#checkbox-output.checkbox-group{type: 'checkbox', checked: true}
+  -#    %label{for: 'checkbox-output'} Output
+  -#    %ul
+  -#      %li
+  -#        %input#checkbox-pane-css.checkbox-pane{type: 'checkbox', name: 'pane-css', checked: true}
+  -#        %label{for: 'checkbox-pane-css'} CSS
+  -#      %li
+  -#        %input#checkbox-pane-page.checkbox-pane{type: 'checkbox', name: 'pane-page', checked: true}
+  -#        %label{for: 'checkbox-pane-page'} Page
+  %label
+    %input.checkbox-pane{type: 'checkbox', name: 'pane-html', checked: true} HTML
+  %label
+    %input.checkbox-pane{type: 'checkbox', name: 'pane-sass', checked: true} SASS
+  %label
+    %input.checkbox-pane{type: 'checkbox', name: 'pane-css', checked: true} CSS
+  %label
+    %input.checkbox-pane{type: 'checkbox', name: 'pane-page', checked: true} Page
+  %button#equalize |<->|
+  %span#statusbar
+#gist-controls
+  %ul
+    %li
+      %a#go-to-gist.is-inactive
+    %li
+      %a.js#save-gist.is-inactive{href: "#"} Save as gist
+    %li
+      %a.js#load-gist{href: "/gist/5567591"} Load gist

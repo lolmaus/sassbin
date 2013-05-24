@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title My Sinatra Website
+    = haml :'partials/assets-top'
+  %body
+    %header#header
+      = haml :'partials/toolbar'
+    #main
+      = haml :main
+    = js :app

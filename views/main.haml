@@ -1,0 +1,35 @@
+-##pane-container
+%section#pane-html.pane.is-active
+  %header
+    %h2 HTML
+  #editor-html.editor
+  %textarea#editor-html-stunt-double{style: 'display: none;'}= @html
+
+
+%section#pane-sass.pane.is-active
+  %header
+    %h2 SASS
+    %select#sass-flavor.flavor
+      %option{value:'sass', selected: @sass_flavor == 'sass'} SASS
+      %option{value:'scss', selected: @sass_flavor == 'scss'} SCSS
+  -##editor-sass.editor= flatten @sass
+  #editor-sass.editor= flatten @sass
+
+
+%section#pane-css.pane.is-active
+  %header
+    %h2 Compiled CSS
+    %select#css-flavor.flavor
+      %option{value:'expanded', selected: @css_flavor == 'expanded'} Expanded
+      %option{value:'nested', selected: @css_flavor == 'nested'} Nested
+      %option{value:'compact', selected: @css_flavor == 'compact'} Compact
+      %option{value:'compressed', selected: @css_flavor == 'compressed'} Compressed
+  #editor-css.editor
+
+
+%section#pane-page.pane.is-active
+  %header
+    %h2 Rendered Page
+  .editor
+    %iframe#output{name: 'output'}
+  .output-overlay

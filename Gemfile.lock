@@ -1,0 +1,50 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    backports (3.3.1)
+    chunky_png (1.2.8)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    eventmachine (1.0.3-x86-mingw32)
+    fssm (0.2.10)
+    haml (4.0.2)
+      tilt
+    jsmin (1.0.1)
+    rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    sass (3.2.9)
+    sinatra (1.4.2)
+      rack (~> 1.5, >= 1.5.2)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sinatra-assetpack (0.2.2)
+      backports
+      jsmin
+      rack-test
+      sinatra
+      tilt (>= 1.3.0)
+    sinatra-contrib (1.4.0)
+      backports (>= 2.0)
+      eventmachine
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.2)
+      tilt (~> 1.3)
+    sinatra-support (1.2.2)
+      sinatra (>= 1.0)
+    tilt (1.4.1)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  compass
+  haml
+  sinatra-assetpack
+  sinatra-contrib
+  sinatra-support
