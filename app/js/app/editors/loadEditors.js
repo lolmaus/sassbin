@@ -2,6 +2,11 @@ var editorHtml;
 var editorSass;
 var editorCss;
 function loadEditors() {
+
+    // Serving workers.js
+    var path = "/js/vendor-static/ace";
+    ace.config.set("workerPath", path);
+
     // Loading the Ace editor
     editorHtml = ace.edit("editor-html");
     editorHtml.setTheme("ace/theme/github");
