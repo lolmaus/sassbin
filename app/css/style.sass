@@ -25,37 +25,13 @@ $header-height: 35px
 
   vertical-align: middle
 
-  #site-title, #pane-controls
-    float: left
-
-  #gist-controls
-    float: right
-
-//& > *, ul, li
-//  display: inline-block
-//
-//  input[type="checkbox"]
-//    margin-left: 0.4em
-//  label
-//    margin-right: 0.4em
-//
-//#checkbox-group-input
-//  $color: pink
-//  background-color: $color
-//  ul
-//    background-color: lighten($color,10%)
-//
-//#checkbox-group-output
-//  $color: lightblue
-//  background-color: $color
-//  ul
-//    background-color: lighten($color,10%)
-
+#site-title, #pane-controls
+  float: left
 
 #gist-controls
   float: right
   li
-    display: inline-block
+    float: right
     margin-left: 0.5em
     a.js
       &, &:visited
@@ -72,15 +48,14 @@ $header-height: 35px
   @extend %stretch
   position: absolute !important
 
-  &:not(:last-child)
-    border-right: 3px ridge grey
-
   $pane-header-height: 25px
   header
     @extend %stretch
     bottom: none
     height: $pane-header-height
     line-height: $pane-header-height
+    padding-left: 0.4em
+    padding-right: 0.4em
 
     vertical-align: middle
 
@@ -92,6 +67,15 @@ $header-height: 35px
   .editor
     @extend %stretch
     top: $pane-header-height + 1
+
+  header, .ace_editor
+    right: 6px
+
+  .ui-resizable-handle
+    right: 0
+    background: url('/images/draggable.png') top left repeat-y grey
+
+
 
 #output
   width: 100%
