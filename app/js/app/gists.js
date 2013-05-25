@@ -14,3 +14,9 @@ $('#save-gist').click(function(e) {
 
     saveGist();
 });
+
+$('#new-gist').click(function(e) {
+    e.preventDefault();
+
+    newGist();
+});

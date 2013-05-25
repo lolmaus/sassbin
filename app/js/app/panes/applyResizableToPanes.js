@@ -63,6 +63,16 @@ function applyResizableToPanes() {
                     $('.output-overlay').hide();
                 }
 
+                // Forcing the Ace editor to resize
+                var thisPaneId = ui.element.attr('id');
+                var nextPaneId = ui.element.nextAll(':visible:first').attr('id');
+                [thisPaneId, nextPaneId].forEach(function(item){
+                   if (item == "pane-html") editorHtml.resize();
+                   else if (item == "pane-sass") editorSass.resize();
+                   else if (item == "pane-css") editorCss.resize();
+                });
+
+
                 // Reapplying to recalculate maxWidth
                 applyResizableToPanes();
             }

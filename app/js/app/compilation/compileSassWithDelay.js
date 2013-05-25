@@ -9,18 +9,27 @@ function compileSassStatusBar(text) {
 }
 
 var compileSassDelayTimer; // variable to delay SASS execution
-var compileSassDelay = 1000; // variable to delay SASS execution
+var compileSassDelay = 500; // variable to delay SASS execution
 function compileSassWithDelay() {
 
     // Reset the timer if it was running
     clearTimeout(compileSassDelayTimer);
+
+
+
     compileSassStatusBar("Taking courage to compile...");
 
     // Compile SASS with delay
     compileSassDelayTimer = setTimeout(function() {
-        compileSassStatusBar("Compiling...");
-        compileSass();
-        compileSassStatusBar();
+
+        var sassCode = editorSass.getSession().getValue();
+        if (sassCode.length > 0) {
+            compileSassStatusBar("Compiling...");
+            compileSass();
+        } else {
+            editorCss.getSession().setValue('');
+            compileSassStatusBar();
+        }
     },compileSassDelay);
 
 }
