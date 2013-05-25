@@ -25,7 +25,8 @@ function loadGist(gistId) {
             });
 
             statusSaved(gistId, gistUrl);
-            window.history.pushState(data, "Gist " + gistId, "/gist/" + gistId + "/");
+            console.log(gistId);
+            window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");
         });
 
         // callback handler that will be called on failure
