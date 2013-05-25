@@ -28,6 +28,7 @@ function compileSassWithDelay() {
             compileSass();
         } else {
             editorCss.getSession().setValue('');
+            compileHtml();
             compileSassStatusBar();
         }
     },compileSassDelay);
