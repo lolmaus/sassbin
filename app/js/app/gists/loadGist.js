@@ -14,7 +14,6 @@ function loadGist(gistId) {
             // log a message to the console
             //console.log("sass: " + sass + "; responce: " + response)
 
-            var gistId = response.id;
             var gistUrl = response.html_url;
             var gistFiles = response.files;
 
@@ -26,6 +25,7 @@ function loadGist(gistId) {
             });
 
             statusSaved(gistId, gistUrl);
+            window.history.pushState(data, "Gist " + gistId, "/gist/" + gistId + "/");
         });
 
         // callback handler that will be called on failure
