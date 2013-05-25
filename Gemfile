@@ -5,4 +5,8 @@ gem 'sinatra-support', :require => 'sinatra/support'
 gem 'sinatra-contrib'
 gem 'compass'
 gem 'haml'
-gem 'thin'
+
+
+platform :ruby do
+  gem 'thin'
+end
