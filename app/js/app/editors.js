@@ -17,6 +17,16 @@ $('.flavor').change(function() {
     statusModified();
     compileSassWithDelay();
 });
+// Change syntax highlighting on SASS flavor change
+$('#sass-flavor').change(function() {
+    sassFlavor = $(this).val();
+
+    if (sassFlavor == "scss")
+        editorSass.getSession().setMode("ace/mode/scss");
+    else if (sassFlavor == "sass")
+        editorSass.getSession().setMode("ace/mode/sass");
+});
+
 
 // binding to changes in SASS textbox
 editorHtml.getSession().on("change", function () {

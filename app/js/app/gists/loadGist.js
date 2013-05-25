@@ -18,8 +18,14 @@ function loadGist(gistId) {
             $.each(gistFiles, function(key, val) {
                 if (/.htm(l)?$/i.test(val.filename))
                     editorHtml.getSession().setValue(val.content);
-                if (/.s(a|c)ss$/i.test(val.filename))
+                if (/.s(a|c)ss$/i.test(val.filename)) {
                     editorSass.getSession().setValue(val.content);
+
+                    if (/.scss$/i.test(val.filename))
+                        editorSass.getSession().setMode("ace/mode/scss");
+                    else if (/.sass$/i.test(val.filename))
+                        editorSass.getSession().setMode("ace/mode/sass");
+                }
             });
 
             statusSaved(gistId, gistUrl);
