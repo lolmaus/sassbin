@@ -36,6 +36,7 @@ function applyResizableToPanes() {
                 var thisPaneDelta = thisPaneNewWidth - thisPaneOriginalWidth;
 
                 var thisPaneOriginalLeft = ui.originalPosition['left'];
+                var thisPaneOriginalLeftRelative = percentageOf(thisPaneOriginalLeft, parentWidth);
 
                 var thisPaneNewRight = parentWidth - (thisPaneOriginalLeft + thisPaneNewWidth);
                 var thisPaneNewRightRelative = percentageOf(thisPaneNewRight,parentWidth);
@@ -50,6 +51,7 @@ function applyResizableToPanes() {
                     width: 'auto',
                     height: 'auto',
 
+                    left: thisPaneOriginalLeftRelative,
                     right: thisPaneNewRightRelative,
                 });
 

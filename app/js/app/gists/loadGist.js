@@ -11,8 +11,6 @@ function loadGist(gistId) {
 
         // callback handler that will be called on success
         requestGist.done(function (response, textStatus, jqXHR){
-            // log a message to the console
-            //console.log("sass: " + sass + "; responce: " + response)
 
             var gistUrl = response.html_url;
             var gistFiles = response.files;
@@ -25,7 +23,6 @@ function loadGist(gistId) {
             });
 
             statusSaved(gistId, gistUrl);
-            console.log(gistId);
             window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");
         });
 
