@@ -16,6 +16,9 @@ function configLoad(config) {
                 $checkbox.prop('checked', false);
                 $pane.deactivate();
             }
+            thisPaneWrap = config[pane]['wrap'];
+            if (typeof thisPaneWrap != 'undefined')
+                editorWrapSet(pane, thisPaneWrap);
         }
     });
 

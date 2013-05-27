@@ -2,7 +2,7 @@
 applyResizableToPanes();
 resetVisiblePanesWidth();
 
-// For all checkboxes
+// For all pane checkboxes
 $(".checkbox-pane").each(function() {
 
     enableAllPanes();
@@ -23,3 +23,15 @@ $('#equalize').click(function(){
     // Reset panes' sizes
     resetVisiblePanesWidth();
 });
+
+// For all wrap checkboxes
+$(".checkbox-wrap").each(function() {
+
+    $(this).change(function() {
+        pane = $(this).prop('name');
+        status = $(this).prop('checked');
+
+        editorWrapSet(pane, status);
+    });
+});
+

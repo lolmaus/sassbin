@@ -18,6 +18,12 @@ function configSave() {
             thisPaneRight = parseInt($pane.css('right'));
             thisPaneRelativeRight = percentageOf(thisPaneRight, parentInnerWidth);
             config[pane]['right'] = thisPaneRelativeRight;
+
+            $thisPaneWrapCheckbox = $('#checkbox-wrap-' + pane);
+            if ($thisPaneWrapCheckbox) {
+                thisPaneWrap = $thisPaneWrapCheckbox.prop('checked');
+                config[pane]['wrap'] = thisPaneWrap;
+            }
         }
     });
 
