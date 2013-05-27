@@ -5,12 +5,15 @@ function resetVisiblePanesWidth() {
 
     visiblePanes.removeAttr('style');
     visiblePanes.each(function( index ) {
-        $(this).css({
+        $pane = $(this);
+
+        $pane.css({
             left: percentage(paneNewWidth * index),
             right: percentage(1 - (paneNewWidth * (index +1)))
         });
-//        left: $pane-width * ($i - 1)
-//        right: 100% - ($pane-width * $i)
+
+        pane = $pane.attr('id').substring(5);
+        resizeEditor(pane);
     });
 }
 
