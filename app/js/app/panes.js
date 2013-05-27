@@ -5,13 +5,16 @@ resetVisiblePanesWidth();
 // For all checkboxes
 $(".checkbox-pane").each(function() {
 
-//    // Enabling the checkbox
-//    $(this).prop('checked', true);
-
     enableAllPanes();
 
     $(this).change(function() {
-        togglePane(this);
+        pane = $(this).prop('name');
+        status = $(this).prop('checked');
+
+        if (!status || status == "false")
+            paneDeactivate(pane);
+        else
+            paneActivate(pane);
     });
 });
 

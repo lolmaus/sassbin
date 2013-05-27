@@ -1,14 +1,19 @@
-function togglePane(checkbox) {
-    // Which pane to toggle
-    var $target = $("#" + $(checkbox).prop('name'));
+function paneActivate(pane) {
+    var $pane = $("#pane-" + pane);
+    var $checkbox = $("#checkbox-pane-" + pane);
 
-    // Enable or disable?
-    var $status = $(checkbox).is(':checked');
+    $checkbox.prop('checked', true);
+    $pane.activate();
 
-    if ($status) {
-        $target.activate();
-    } else {
-        $target.deactivate();
-    }
+    resetVisiblePanesWidth();
+}
+
+function paneDeactivate(pane) {
+    var $pane = $("#pane-" + pane);
+    var $checkbox = $("#checkbox-pane-" + pane);
+
+    $checkbox.prop('checked', false);
+    $pane.deactivate();
+
     resetVisiblePanesWidth();
 }
