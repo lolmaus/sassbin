@@ -5,8 +5,10 @@ resetVisiblePanesWidth();
 // For all checkboxes
 $(".checkbox-pane").each(function() {
 
-    // Enabling the checkbox
-    $(this).prop('checked', true);
+//    // Enabling the checkbox
+//    $(this).prop('checked', true);
+
+    enableAllPanes();
 
     $(this).change(function() {
         togglePane(this);

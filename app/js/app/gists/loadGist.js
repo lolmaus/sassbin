@@ -14,19 +14,26 @@ function loadGist(gistId) {
 
             var gistUrl = response.html_url;
             var gistFiles = response.files;
+            var config;
 
             $.each(gistFiles, function(key, val) {
                 if (/.htm(l)?$/i.test(val.filename))
                     editorHtml.getSession().setValue(val.content);
-                if (/.s(a|c)ss$/i.test(val.filename)) {
+                else if (/.s(a|c)ss$/i.test(val.filename)) {
                     editorSass.getSession().setValue(val.content);
 
                     if (/.scss$/i.test(val.filename))
                         editorSass.getSession().setMode("ace/mode/scss");
                     else if (/.sass$/i.test(val.filename))
                         editorSass.getSession().setMode("ace/mode/sass");
-                }
+                } else if (val.filename == '~sassbin-config.json')
+                    config = val.content;
             });
+
+            if (config)
+                configLoad(JSON.parse(config));
+            else
+                enableAllPanes();
 
             statusSaved(gistId, gistUrl);
             window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");

@@ -13,3 +13,15 @@ function resetVisiblePanesWidth() {
 //        right: 100% - ($pane-width * $i)
     });
 }
+
+function enableAllPanes() {
+    // For all checkboxes
+    $(".checkbox-pane").each(function() {
+
+        // Enabling the checkbox
+        $('.checkbox-pane').prop('checked', true);
+
+        // Enabling all panes
+        $('.pane').activate();
+    });
+}
