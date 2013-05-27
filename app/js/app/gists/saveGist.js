@@ -27,7 +27,7 @@ function saveGist() {
             gistId = e.id;
             gistUrl = e.html_url;
             window.history.pushState(data, "Gist " + gistId, "/gist/" + gistId + "/");
-            statusSaved(gistId, gistUrl);
+            appStatusSaved(gistId, gistUrl);
             statusBar();
         })
         .error( function(e) {

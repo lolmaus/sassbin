@@ -8,13 +8,13 @@ compileSassWithDelay();
 // Compile SASS to CSS on change
 // binding to changes in SASS textbox
 editorSass.getSession().on("change", function () {
-    statusModified();
+    appStatusModified();
     compileSassWithDelay();
 });
 
 // Compile SASS on flavor change
 $('.flavor').change(function() {
-    statusModified();
+    appStatusModified();
     compileSassWithDelay();
 });
 // Change syntax highlighting on SASS flavor change
@@ -30,6 +30,6 @@ $('#sass-flavor').change(function() {
 
 // binding to changes in SASS textbox
 editorHtml.getSession().on("change", function () {
-    statusModified();
+    appStatusModified();
     compileHtml();
 });

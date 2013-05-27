@@ -39,7 +39,7 @@ function loadGist(gistId) {
                 enableAllPanes();
 
             statusBar();
-            statusSaved(gistId, gistUrl);
+            appStatusSaved(gistId, gistUrl);
             window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");
         });
 
