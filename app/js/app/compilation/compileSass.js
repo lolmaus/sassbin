@@ -40,7 +40,7 @@ function compileSass() {
 
     // callback handler for both success and failure failure
     requestSass.always(function (){
-        compileSassStatusBar();
+        statusBar();
     });
 
 }

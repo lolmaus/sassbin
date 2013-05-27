@@ -15,6 +15,8 @@ function saveGist() {
     if (sassCode) data["files"][sassFilename] = { "content": sassCode };
     data["files"]["~sassbin-config.json"] = { "content": JSON.stringify(configSave(), null, 4) };
 
+    statusBar('Saving...');
+
     $.ajax({
         url: 'https://api.github.com/gists',
         type: 'POST',
@@ -26,9 +28,10 @@ function saveGist() {
             gistUrl = e.html_url;
             window.history.pushState(data, "Gist " + gistId, "/gist/" + gistId + "/");
             statusSaved(gistId, gistUrl);
+            statusBar();
         })
         .error( function(e) {
             console.warn("gist save error", e);
+            statusBar();
         });
-
 }

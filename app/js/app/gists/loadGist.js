@@ -7,6 +7,9 @@ function loadGist(gistId) {
     }
 
     if (gistId) {
+
+        statusBar('Loading gist ' + gistId + "...");
+
         requestGist = $.get('https://api.github.com/gists/' + gistId);
 
         // callback handler that will be called on success
@@ -35,6 +38,7 @@ function loadGist(gistId) {
             else
                 enableAllPanes();
 
+            statusBar();
             statusSaved(gistId, gistUrl);
             window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");
         });
@@ -45,6 +49,7 @@ function loadGist(gistId) {
             var error =  "Failed to ask server for SASS compilation: "+ textStatus + ', ' + errorThrown
             console.error(error);
             editorHtml.getSession().setValue(error);
+            statusBar();
         });
     }
 }
