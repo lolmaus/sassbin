@@ -17,11 +17,11 @@ function loadEditors() {
     editorSass = ace.edit("editor-sass");
     editorSass.setTheme("ace/theme/github");
     editorSass.getSession().setMode("ace/mode/sass");
-    editorHtml.getSession().setUseWrapMode(true);
+    editorSass.getSession().setUseWrapMode(true);
 
     editorCss = ace.edit("editor-css");
     editorCss.setTheme("ace/theme/github");
     editorCss.getSession().setMode("ace/mode/css");
-    editorHtml.getSession().setUseWrapMode(true);
+    editorCss.getSession().setUseWrapMode(true);
     editorCss.setReadOnly(true);
 }
