@@ -12,13 +12,16 @@ function loadEditors() {
     editorHtml.setTheme("ace/theme/github");
     editorHtml.getSession().setMode("ace/mode/html");
     editorHtml.getSession().setValue($('#editor-html-stunt-double').text());
+    editorHtml.getSession().setUseWrapMode(true);
 
     editorSass = ace.edit("editor-sass");
     editorSass.setTheme("ace/theme/github");
     editorSass.getSession().setMode("ace/mode/sass");
+    editorHtml.getSession().setUseWrapMode(true);
 
     editorCss = ace.edit("editor-css");
     editorCss.setTheme("ace/theme/github");
     editorCss.getSession().setMode("ace/mode/css");
+    editorHtml.getSession().setUseWrapMode(true);
     editorCss.setReadOnly(true);
 }
