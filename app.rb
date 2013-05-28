@@ -7,6 +7,30 @@ require 'sinatra/assetpack'
 require 'compass'
 require 'sinatra/support'
 
+# Compass extensions
+
+require 'blend-mode'
+require 'bourbon-compass'
+require 'breakpoint'
+require 'breakpoint-slicer'
+require 'color-schemer'
+require 'css-slideshow'
+require 'fancy-buttons'
+require 'fittext'
+require 'harsh'
+require 'modular-scale'
+require 'neat-compass'
+require 'rwdcalc'
+require 'responsive-sass'
+require 'salsa'
+require 'sassy-buttons'
+require 'sassy-text-shadow'
+require 'singularitygs'
+require 'stipe'
+require 'susy'
+require 'toolkit'
+require 'zen-grids'
+
 
 Encoding.default_external = 'utf-8'  if defined?(::Encoding)
 
