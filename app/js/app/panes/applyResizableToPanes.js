@@ -9,7 +9,7 @@ function nextPaneMaxWidth(currentPaneObject) {
 function applyResizableToPanes() {
     $(".pane:visible").not(':last-child').each(function( index ) {
         $(this).resizable({
-            helper: 'ui-resizable-helper',
+//            helper: 'ui-resizable-helper',
             handles: 'e',
             minWidth: 100,
             maxWidth: nextPaneMaxWidth(this),
@@ -23,8 +23,8 @@ function applyResizableToPanes() {
                 }
             },
 
-            // This happens on mouseup after resize
-            stop: function(event, ui){
+            // This happens on dragging the edge
+            resize: function(event, ui){
 
                 // Calculating the new css attributes for resizing the panes:
                 // `right` css attribute for the current pane,
@@ -70,9 +70,10 @@ function applyResizableToPanes() {
                 var nextPane = ui.element.nextAll(':visible:first').attr('id').substring(5);
                 resizeEditor(thisPane);
                 resizeEditor(nextPane);
+            },
 
-
-
+            // This happens on mouseup after resize
+            stop: function(event, ui){
                 // Reapplying to recalculate maxWidth
                 applyResizableToPanes();
             }
