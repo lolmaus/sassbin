@@ -5,6 +5,12 @@ function nextPaneMaxWidth(currentPaneObject) {
     return maxWidth;
 }
 
+function applyResizableMaxWidthToPanes() {
+    $(".pane:visible").not(':last-child').each(function() {
+        $(this).resizable({maxWidth: nextPaneMaxWidth(this)});
+    });
+}
+
 //var currentPaneOriginalWidth = 0; // Has to be declared outside applyResizableToPanes()
 function applyResizableToPanes() {
     $(".pane:visible").not(':last-child').each(function( index ) {
@@ -18,9 +24,7 @@ function applyResizableToPanes() {
             start: function(event, ui){
                 // Covering the iframe with a transparent div
                 // so that it does not prevent Resizable from tracking the cursor over the iframe
-                if ($(ui.element).is(':nth-last-child(2)')) {
-                    $('.output-overlay').show();
-                }
+                $('.output-overlay').show();
             },
 
             // This happens on dragging the edge
@@ -60,11 +64,6 @@ function applyResizableToPanes() {
                     left: nextPaneNewLeftRelative,
                 });
 
-                // Uncovering the iframe back
-                if ($(ui.element).is(':nth-last-child(2)')) {
-                    $('.output-overlay').hide();
-                }
-
                 // Forcing the Ace editor to resize
                 var thisPane = ui.element.attr('id').substring(5);
                 var nextPane = ui.element.nextAll(':visible:first').attr('id').substring(5);
@@ -74,8 +73,9 @@ function applyResizableToPanes() {
 
             // This happens on mouseup after resize
             stop: function(event, ui){
+                $('.output-overlay').hide();
                 // Reapplying to recalculate maxWidth
-                applyResizableToPanes();
+                applyResizableMaxWidthToPanes();
             }
         });
     });

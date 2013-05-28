@@ -15,6 +15,7 @@ function resetVisiblePanesWidth() {
         pane = $pane.attr('id').substring(5);
         resizeEditor(pane);
     });
+    applyResizableMaxWidthToPanes();
 }
 
 function enableAllPanes() {
