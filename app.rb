@@ -103,8 +103,6 @@ class App < Sinatra::Base
     sass_flavor = params[:sass_flavor]
     css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
 
-    Sass.logger.clean!
-
     begin
       if sass_flavor == 'sass'
         output = sass(sass_code.chomp, {style: css_flavor, cache: false})
@@ -116,6 +114,8 @@ class App < Sinatra::Base
     rescue Sass::SyntaxError => e
       status 200
       e.to_s.lines.first
+    ensure
+      Sass.logger.clean!
     end if sass_code
   end
 end
