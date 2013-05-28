@@ -39,14 +39,16 @@ $header-height: 35px
 #gist-controls
   float: right
   margin-right: 0.5em
-  li
-    float: left
-    margin-left: 0.5em
-    a.js
-      &, &:visited
-        color: blue
-        text-decoration: none
-        border-bottom: 1px dashed blue
+  ul
+    text-align: right
+    li
+      display: inline-block
+      margin-left: 0.5em
+      a.js
+        &, &:visited
+          color: blue
+          text-decoration: none
+          border-bottom: 1px dashed blue
 
 #main
   @extend %stretch
