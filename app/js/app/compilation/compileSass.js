@@ -9,9 +9,7 @@ function compileSass() {
     var css = null;
 
     // abort any pending requestSass
-    if (requestSass) {
-        requestSass.abort();
-    }
+    abortRequests();
 
     // Sending an AJAX requestSass
     var requestSass = $.ajax({

@@ -1,3 +1,4 @@
+
 function saveGist() {
     var sassCode = editorSass.getSession().getValue();
     var htmlCode = editorHtml.getSession().getValue();
@@ -17,7 +18,9 @@ function saveGist() {
 
     statusBar('Saving...');
 
-    $.ajax({
+    abortRequests();
+
+    requestGist = $.ajax({
         url: 'https://api.github.com/gists',
         type: 'POST',
         dataType: 'json',

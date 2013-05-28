@@ -2,9 +2,7 @@ var requestGist;
 function loadGist(gistId) {
 
     // abort any pending requestSass
-    if (requestGist) {
-        requestSass.abort();
-    }
+    abortRequests();
 
     if (gistId) {
 
