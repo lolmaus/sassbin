@@ -41,7 +41,7 @@ class SassLogger < Sass::Logger::Base
   @messages = ''
 
   def _log(level, message)
-    @messages << "/*\n #{message.lines.first} */\n"
+    @messages << "/*\n #{message} */\n"
   end
 
   def clean!
