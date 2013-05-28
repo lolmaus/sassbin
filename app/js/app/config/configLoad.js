@@ -11,6 +11,7 @@ function configLoad(config) {
                 $pane.activate();
                 $pane.css('left', config[pane]['left']);
                 $pane.css('right', config[pane]['right']);
+                resizeEditor(pane);
             }
             else {
                 $checkbox.prop('checked', false);
