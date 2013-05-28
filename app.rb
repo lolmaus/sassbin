@@ -34,6 +34,21 @@ require 'zen-grids'
 
 Encoding.default_external = 'utf-8'  if defined?(::Encoding)
 
+class SassLogger < Sass::Logger::Base
+
+  attr_reader :messages
+
+  @messages = ''
+
+  def _log(level, message)
+    @messages << "/*\n #{message.lines.first} */\n"
+  end
+
+  def clean!
+    @messages = ''
+  end
+end
+
 class App < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
@@ -73,6 +88,10 @@ class App < Sinatra::Base
     Sass.load_paths << path
   end
 
+  # Overriding Sass logger
+  Sass.logger = SassLogger.new
+  Sass.logger.log_level = :warn
+
   ["/", "/gist/:gist", "/gist/:gist/"].each do |path|
     get path do
       haml :main
@@ -84,16 +103,19 @@ class App < Sinatra::Base
     sass_flavor = params[:sass_flavor]
     css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
 
+    Sass.logger.clean!
+
     begin
       if sass_flavor == 'sass'
-        sass(sass_code.chomp, {style: css_flavor, quiet: true, cache: false})
+        output = sass(sass_code.chomp, {style: css_flavor, cache: false})
       else
-        scss(sass_code.chomp, {style: css_flavor, quiet: true, cache: false})
+        output = scss(sass_code.chomp, {style: css_flavor, cache: false})
       end
 
+      Sass.logger.messages << output
     rescue Sass::SyntaxError => e
       status 200
-      e.to_s
+      e.to_s.lines.first
     end if sass_code
   end
 end
