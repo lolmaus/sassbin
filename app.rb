@@ -38,7 +38,9 @@ class SassLogger < Sass::Logger::Base
 
   attr_reader :messages
 
-  @messages = ''
+  def initialize
+    @messages = ''
+  end
 
   def _log(level, message)
     @messages << "/*\n #{message} */\n"
@@ -103,19 +105,21 @@ class App < Sinatra::Base
     sass_flavor = params[:sass_flavor]
     css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
 
+    Sass.logger.clean!
+
     begin
       if sass_flavor == 'sass'
-        output = sass(sass_code.chomp, {style: css_flavor, cache: false})
+        #output = sass(sass_code.chomp, {style: css_flavor, cache: false})
+        output = Tilt::SassTemplate.new('SASS code', {style: css_flavor, cache: false}) { sass_code }.render
       else
-        output = scss(sass_code.chomp, {style: css_flavor, cache: false})
+        #output = scss(sass_code.chomp, {style: css_flavor, cache: false})
+        output = Tilt::ScssTemplate.new('SCSS code', {style: css_flavor, cache: false}) { sass_code }.render
       end
 
-      Sass.logger.messages << output
+      Sass.logger.messages << "\n" << output
     rescue Sass::SyntaxError => e
       status 200
       e.to_s.lines.first
-    ensure
-      Sass.logger.clean!
     end if sass_code
   end
 end
