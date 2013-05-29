@@ -15,6 +15,8 @@ $(".checkbox-pane").each(function() {
             paneDeactivate(pane);
         else
             paneActivate(pane);
+
+        applyResizableToPanes();
     });
 });
 

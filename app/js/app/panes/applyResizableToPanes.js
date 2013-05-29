@@ -13,70 +13,83 @@ function applyResizableMaxWidthToPanes() {
 
 //var currentPaneOriginalWidth = 0; // Has to be declared outside applyResizableToPanes()
 function applyResizableToPanes() {
-    $(".pane:visible").not(':last-child').each(function( index ) {
-        $(this).resizable({
-//            helper: 'ui-resizable-helper',
-            handles: 'e',
-            minWidth: 100,
-            maxWidth: nextPaneMaxWidth(this),
 
-            // This happens on mousedown when starting a resize
-            start: function(event, ui){
-                // Covering the iframe with a transparent div
-                // so that it does not prevent Resizable from tracking the cursor over the iframe
-                $('.output-overlay').show();
-            },
+    $visiblePanes = $(".pane:visible");
 
-            // This happens on dragging the edge
-            resize: function(event, ui){
+    $visiblePanes.each(function( index ) {
 
-                // Calculating the new css attributes for resizing the panes:
-                // `right` css attribute for the current pane,
-                // `left` for the next pane.
-                var parentWidth = ui.element.parent().width();
+        $pane = $(this);
 
-                var thisPaneOriginalWidth = ui.originalSize['width'];
-                var thisPaneNewWidth = ui.size['width'];
-                var thisPaneDelta = thisPaneNewWidth - thisPaneOriginalWidth;
+        // The last pane should not be resizable
+        if (index == $visiblePanes.length -1) {
+            if ($pane.is('.ui-resizable'))
+                $pane.resizable('destroy');
 
-                var thisPaneOriginalLeft = ui.originalPosition['left'];
-                var thisPaneOriginalLeftRelative = percentageOf(thisPaneOriginalLeft, parentWidth);
+        } else {
+            $pane.resizable({
+    //            helper: 'ui-resizable-helper',
+                handles: 'e',
+                minWidth: 100,
+                maxWidth: nextPaneMaxWidth(this),
 
-                var thisPaneNewRight = parentWidth - (thisPaneOriginalLeft + thisPaneNewWidth);
-                var thisPaneNewRightRelative = percentageOf(thisPaneNewRight,parentWidth);
+                // This happens on mousedown when starting a resize
+                start: function(event, ui){
+                    // Covering the iframe with a transparent div
+                    // so that it does not prevent Resizable from tracking the cursor over the iframe
+                    $('.output-overlay').show();
+                },
 
-                var nextPaneOriginalLeft = thisPaneOriginalLeft + thisPaneOriginalWidth;
-                var nextPaneNewLeft = nextPaneOriginalLeft + thisPaneDelta;
-                var nextPaneNewLeftRelative = percentageOf(nextPaneNewLeft, parentWidth);
+                // This happens on dragging the edge
+                resize: function(event, ui){
 
-                // Resizing current pane using the `right` css attribute instead of `width`
-                ui.element.css({
-                    // Prevent modifying the `width` and `height` attributes
-                    width: 'auto',
-                    height: 'auto',
+                    // Calculating the new css attributes for resizing the panes:
+                    // `right` css attribute for the current pane,
+                    // `left` for the next pane.
+                    var parentWidth = ui.element.parent().width();
 
-                    left: thisPaneOriginalLeftRelative,
-                    right: thisPaneNewRightRelative,
-                });
+                    var thisPaneOriginalWidth = ui.originalSize['width'];
+                    var thisPaneNewWidth = ui.size['width'];
+                    var thisPaneDelta = thisPaneNewWidth - thisPaneOriginalWidth;
 
-                // Resizing the next visible pane
-                $(ui.element).nextAll(':visible:first').css({
-                    left: nextPaneNewLeftRelative,
-                });
+                    var thisPaneOriginalLeft = ui.originalPosition['left'];
+                    var thisPaneOriginalLeftRelative = percentageOf(thisPaneOriginalLeft, parentWidth);
 
-                // Forcing the Ace editor to resize
-                var thisPane = ui.element.attr('id').substring(5);
-                var nextPane = ui.element.nextAll(':visible:first').attr('id').substring(5);
-                resizeEditor(thisPane);
-                resizeEditor(nextPane);
-            },
+                    var thisPaneNewRight = parentWidth - (thisPaneOriginalLeft + thisPaneNewWidth);
+                    var thisPaneNewRightRelative = percentageOf(thisPaneNewRight,parentWidth);
 
-            // This happens on mouseup after resize
-            stop: function(event, ui){
-                $('.output-overlay').hide();
-                // Reapplying to recalculate maxWidth
-                applyResizableMaxWidthToPanes();
-            }
-        });
+                    var nextPaneOriginalLeft = thisPaneOriginalLeft + thisPaneOriginalWidth;
+                    var nextPaneNewLeft = nextPaneOriginalLeft + thisPaneDelta;
+                    var nextPaneNewLeftRelative = percentageOf(nextPaneNewLeft, parentWidth);
+
+                    // Resizing current pane using the `right` css attribute instead of `width`
+                    ui.element.css({
+                        // Prevent modifying the `width` and `height` attributes
+                        width: 'auto',
+                        height: 'auto',
+
+                        left: thisPaneOriginalLeftRelative,
+                        right: thisPaneNewRightRelative,
+                    });
+
+                    // Resizing the next visible pane
+                    $(ui.element).nextAll(':visible:first').css({
+                        left: nextPaneNewLeftRelative,
+                    });
+
+                    // Forcing the Ace editor to resize
+                    var thisPane = ui.element.attr('id').substring(5);
+                    var nextPane = ui.element.nextAll(':visible:first').attr('id').substring(5);
+                    resizeEditor(thisPane);
+                    resizeEditor(nextPane);
+                },
+
+                // This happens on mouseup after resize
+                stop: function(event, ui){
+                    $('.output-overlay').hide();
+                    // Reapplying to recalculate maxWidth
+                    applyResizableMaxWidthToPanes();
+                }
+            });
+        }
     });
 };

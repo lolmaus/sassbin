@@ -24,4 +24,5 @@ function configLoad(config) {
     });
 
     $('#css-flavor').val(config['css-flavor']);
+    applyResizableToPanes();
 }
