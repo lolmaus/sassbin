@@ -15,8 +15,12 @@ function configSave() {
             thisPaneRelativeLeft = percentageOf(thisPaneLeft, parentInnerWidth);
             config[pane]['left'] = thisPaneRelativeLeft;
 
-            thisPaneRight = parseInt($pane.css('right'));
-            thisPaneRelativeRight = percentageOf(thisPaneRight, parentInnerWidth);
+            // Working around a jQuery/Chrome issue: http://bugs.jquery.com/ticket/13956
+            thisPaneRightRaw = $pane.css('right');
+            if (thisPaneRightRaw.slice(-1) == '%')
+                thisPaneRelativeRight = thisPaneRightRaw;
+            else
+                thisPaneRelativeRight = percentageOf(parseInt(thisPaneRightRaw), parentInnerWidth);
             config[pane]['right'] = thisPaneRelativeRight;
 
             $thisPaneWrapCheckbox = $('#checkbox-wrap-' + pane);
