@@ -39,15 +39,16 @@ class SassLogger < Sass::Logger::Base
   attr_reader :messages
 
   def initialize
-    @messages = ''
+    clean!
   end
 
   def _log(level, message)
-    @messages << "/*\n #{message} */\n"
+    @messages << "\n\n" unless @messages.empty?
+    @messages << "/* #{message.rstrip} */"
   end
 
   def clean!
-    @messages = ''
+    @messages = String.new
   end
 end
 
@@ -116,7 +117,7 @@ class App < Sinatra::Base
         output = Tilt::ScssTemplate.new('SCSS code', {style: css_flavor, cache: false}) { sass_code }.render
       end
 
-      Sass.logger.messages << "\n" << output
+      Sass.logger.messages << "\n\n" << output
     rescue Sass::SyntaxError => e
       status 200
       e.to_s.lines.first
