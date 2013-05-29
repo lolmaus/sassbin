@@ -117,7 +117,9 @@ class App < Sinatra::Base
         output = Tilt::ScssTemplate.new('SCSS code', {style: css_flavor, cache: false}) { sass_code }.render
       end
 
-      Sass.logger.messages << "\n\n" << output
+      if !Sass.logger.messages.empty? then output.prepend Sass.logger.messages << "\n\n" end
+
+      output
     rescue Sass::SyntaxError => e
       status 200
       e.to_s.lines.first
