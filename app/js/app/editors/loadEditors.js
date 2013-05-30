@@ -27,6 +27,8 @@ function loadEditors() {
     editorCss.getSession().setMode("ace/mode/css");
     editorCss.getSession().setUseWrapMode(true);
     editorCss.getSession().setTabSize(2);
+    editorCss.setHighlightActiveLine(false);
     editorCss.getSession().setUseSoftTabs(true);
+
     editorCss.setReadOnly(true);
 }
