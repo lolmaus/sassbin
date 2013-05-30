@@ -88,6 +88,7 @@ function applyResizableToPanes() {
                     $('.output-overlay').hide();
                     // Reapplying to recalculate maxWidth
                     applyResizableMaxWidthToPanes();
+                    equalizeShow();
                 }
             });
         }

@@ -1,4 +1,5 @@
 @import compass
+@import sassy-buttons
 
 +global-reset
 
@@ -6,6 +7,12 @@ html
   overflow-y: hidden
   overflow-x: auto
   height: 100%
+  font-family: Verdana, Geneva, sans-serif
+  font-size: 12px
+  color: #2d2d2d
+  +text-shadow(1px 1px white)
+
+
 
 body
   height: 100%
@@ -29,8 +36,51 @@ $header-height: 35px
   bottom: none
   height: $header-height
   line-height: $header-height
-
   vertical-align: middle
+  +background-image(linear-gradient(left, #3c3c3c, #646464, #3c3c3c))
+
+  border-bottom: 1px solid black
+
+  color: white
+  +text-shadow(1px 1px black)
+
+  a
+    color: white
+    text-decoration: none
+    border-bottom: 1px solid white
+
+    &:visited
+      color: lightgrey
+      border-bottom-color: lightgrey
+
+    &:hover
+      color: lightblue
+      border-bottom-color: lightblue
+
+    &.js
+      &, &:visited
+        color: white
+        border-bottom: 1px dashed white
+      &:hover
+        color: lightblue
+        border-bottom-color: lightblue
+
+  label
+    input[type=checkbox]
+      display: none
+    span
+      +sassy-button("simple", 10px, 12px, #ccc)
+      line-height: 1
+      padding: 0.3em 0.5em
+    input[type=checkbox]:checked + span
+      +sassy-button-style("inset")
+
+input[type=checkbox]
+  margin-top: 1px
+  vertical-align: middle
+
+#site-title
+  font-weight: bold
 
 #site-title, #pane-controls
   float: left
@@ -44,11 +94,6 @@ $header-height: 35px
     li
       display: inline-block
       margin-left: 0.5em
-      a.js
-        &, &:visited
-          color: blue
-          text-decoration: none
-          border-bottom: 1px dashed blue
 
 #main
   @extend %stretch
@@ -67,8 +112,9 @@ $header-height: 35px
     line-height: $pane-header-height
     padding-left: 0.4em
     padding-right: 0.4em
-
     vertical-align: middle
+    +background-image(linear-gradient(#FCFCFC, #EBEBEB))
+    border-bottom: 1px solid #E5E5E5
 
     & > *
       display: inline-block
@@ -81,11 +127,13 @@ $header-height: 35px
     @extend %stretch
     top: $pane-header-height + 1
 
+.pane.ui-resizable
   header, .ace_editor
     right: 6px
 
   .ui-resizable-handle
     right: 0
+    width: 6px
     background: url('/images/draggable.png') top left repeat-y grey
 
 
@@ -98,7 +146,6 @@ $header-height: 35px
   display: none
   @extend %stretch
 
-//@for $i from 1 through 4
 $panes: pane-html, pane-sass, pane-css, pane-page
 $panes-amount: length($panes)
 $pane-width: 100% / $panes-amount
@@ -108,7 +155,10 @@ $pane-width: 100% / $panes-amount
   ##{$pane}
     left: $pane-width * ($i - 1)
     right: 100% - ($pane-width * $i)
-    background-color: rgba(nth(lightblue pink lemonchiffon greenyellow, $i),.25)
+
+#pane-css
+  .ace_scroller
+    background-color: #eee
 
 .is-active
   display: block
@@ -117,4 +167,3 @@ $pane-width: 100% / $panes-amount
 
 #statusbar
   margin-left: 1em
-  color: grey

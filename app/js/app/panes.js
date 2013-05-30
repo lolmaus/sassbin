@@ -24,6 +24,7 @@ $(".checkbox-pane").each(function() {
 $('#equalize').click(function(){
     // Reset panes' sizes
     resetVisiblePanesWidth();
+    equalizeHide();
 });
 
 // For all wrap checkboxes

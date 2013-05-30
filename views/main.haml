@@ -4,7 +4,8 @@
     %h2 HTML
     .pane-settings
       %label
-        %input.checkbox-wrap#checkbox-wrap-html{type: 'checkbox', name: 'html', checked: true} Wrap
+        %input.checkbox-wrap#checkbox-wrap-html{type: 'checkbox', name: 'html', checked: true}
+        %span Wrap
   #editor-html.editor
   %textarea#editor-html-stunt-double{style: 'display: none;'}= @html
 
@@ -14,7 +15,8 @@
     %h2 SASS
     .pane-settings
       %label
-        %input.checkbox-wrap#checkbox-wrap-sass{type: 'checkbox', name: 'sass', checked: true} Wrap
+        %input.checkbox-wrap#checkbox-wrap-sass{type: 'checkbox', name: 'sass', checked: true}
+        %span Wrap
       %select#sass-flavor.flavor
         %option{value:'sass', selected: @sass_flavor == 'sass'} SASS
         %option{value:'scss', selected: @sass_flavor == 'scss'} SCSS
@@ -27,7 +29,8 @@
     %h2 Compiled CSS
     .pane-settings
       %label
-        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true} Wrap
+        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
+        %span Wrap
       %select#css-flavor.flavor
         %option{value:'expanded', selected: @css_flavor == 'expanded'} Expanded
         %option{value:'nested', selected: @css_flavor == 'nested'} Nested
