@@ -28,5 +28,6 @@ function loadEditors() {
     editorCss.getSession().setUseWrapMode(true);
     editorCss.getSession().setTabSize(2);
     editorCss.getSession().setUseSoftTabs(true);
+    editorCss.setHighlightActiveLine(false);
     editorCss.setReadOnly(true);
 }
