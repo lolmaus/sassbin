@@ -1,5 +1,5 @@
 var compileSassDelayTimer; // variable to delay SASS execution
-var compileSassDelay = 500; // variable to delay SASS execution
+var compileSassDelay = 800; // variable to delay SASS execution
 function compileSassWithDelay() {
 
     // Reset the timer if it was running
