@@ -12,7 +12,7 @@ function compileSass() {
     abortRequests();
 
     // Sending an AJAX requestSass
-    var requestSass = $.ajax({
+    requestSass = $.ajax({
         url: '/compile-sass',
         type: 'POST',
         data: { 'sass_code': sassCode,
@@ -30,10 +30,14 @@ function compileSass() {
 
     // callback handler that will be called on failure
     requestSass.fail(function (jqXHR, textStatus, errorThrown){
-        // log the error to the console
-        var error =  "Failed to ask server for SASS compilation: "+ textStatus + ', ' + errorThrown
-        console.error(error);
-        editorCss.getSession().setValue(error);
+
+        if (textStatus != "abort") {
+          // log the error to the console
+          var error =  "Failed to ask server for SASS compilation: "+ textStatus + ', ' + errorThrown
+          console.error(error);
+          editorCss.getSession().setValue(error);
+        }
+
     });
 
     // callback handler for both success and failure failure
