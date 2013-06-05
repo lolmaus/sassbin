@@ -1,4 +1,13 @@
-function abortRequests() {
-    if (requestGist) requestGist.abort();
-    if (requestSass) requestSass.abort();
+function abortGistRequest() {
+  if (requestGist) requestGist.abort();
 }
+
+function abortSassRequest() {
+  if (requestSass) requestSass.abort();
+}
+
+function abortRequests() {
+  abortGistRequest();
+  abortSassRequest();
+}
+
