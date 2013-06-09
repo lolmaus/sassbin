@@ -1,9 +1,6 @@
 // Enabling Ace Editor
 loadEditors();
 
-// Compile SASS to CSS on page load
-compileSassWithDelay();
-
 
 // Compile SASS to CSS on change
 // binding to changes in SASS textbox
