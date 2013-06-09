@@ -1,7 +1,11 @@
 -##pane-container
 %section#pane-html.pane.is-active
   %header
-    %h2 HTML
+    %h2
+      %select#html-flavor.flavor
+        %option{value:'html', selected: @html_flavor == 'html'} HTML
+        %option{value:'haml', selected: @html_flavor == 'haml'} HAML
+      body
     .pane-settings
       %label
         %input.checkbox-wrap#checkbox-wrap-html{type: 'checkbox', name: 'html', checked: true}
@@ -12,30 +16,31 @@
 
 %section#pane-sass.pane.is-active
   %header
-    %h2 SASS
+    %h2
+      %select#sass-flavor.flavor
+        %option{value:'sass', selected: @sass_flavor == 'sass'} SASS
+        %option{value:'scss', selected: @sass_flavor == 'scss'} SCSS
     .pane-settings
       %label
         %input.checkbox-wrap#checkbox-wrap-sass{type: 'checkbox', name: 'sass', checked: true}
         %span Wrap
-      %select#sass-flavor.flavor
-        %option{value:'sass', selected: @sass_flavor == 'sass'} SASS
-        %option{value:'scss', selected: @sass_flavor == 'scss'} SCSS
   -##editor-sass.editor= flatten @sass
   #editor-sass.editor= flatten @sass
 
 
 %section#pane-css.pane.is-active
   %header
-    %h2 Compiled CSS
-    .pane-settings
-      %label
-        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
-        %span Wrap
+    %h2
+      Compiled CSS
       %select#css-flavor.flavor
         %option{value:'expanded', selected: @css_flavor == 'expanded'} Expanded
         %option{value:'nested', selected: @css_flavor == 'nested'} Nested
         %option{value:'compact', selected: @css_flavor == 'compact'} Compact
         %option{value:'compressed', selected: @css_flavor == 'compressed'} Compressed
+    .pane-settings
+      %label
+        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
+        %span Wrap
   #editor-css.editor
 
 

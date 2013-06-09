@@ -5,14 +5,15 @@ function saveGist() {
 
     if (!sassCode && !htmlCode) return;
 
-    var sassFilename = "style." + $('#sass-flavor :selected').prop('value');
+    var sassFilename = "style." + $('#sass-flavor').val();
+    var htmlFilename = "structure." + $('#html-flavor').val();
 
     var data = {
         "description": "Created with SassBin",
         "public": true,
         "files": {}
     }
-    if (htmlCode) data["files"]["structure.html"] = { "content": htmlCode };
+    if (htmlCode) data["files"][htmlFilename] = { "content": htmlCode };
     if (sassCode) data["files"][sassFilename] = { "content": sassCode };
     data["files"]["~sassbin-config.json"] = { "content": JSON.stringify(configSave(), null, 4) };
 

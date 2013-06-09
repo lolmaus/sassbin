@@ -6,6 +6,12 @@ function compileHtml() {
 
     var css = editorCss.getSession().getValue();
     var html = editorHtml.getSession().getValue();
+    var htmlFlavor = $('#html-flavor').val();
+
+    if (htmlFlavor == 'haml') {
+        hamlFn = haml.compileHaml({source: html});
+        html = hamlFn();
+    }
 
     if(style.length == 0){
         head.prepend('<style></style>')

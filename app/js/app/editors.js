@@ -12,11 +12,18 @@ editorSass.getSession().on("change", function () {
     compileSassWithDelay();
 });
 
-// Compile SASS on flavor change
-$('.flavor').change(function() {
+// Compile SASS on CSS or SASS flavor change
+$('#sass-flavor, #css-flavor').change(function() {
     appStatusModified();
     compileSassWithDelay();
 });
+
+// Compile HTML on HTML flavor change
+$('#html-flavor').change(function() {
+    appStatusModified();
+    compileHtml();
+});
+
 // Change syntax highlighting on SASS flavor change
 $('#sass-flavor').change(function() {
     sassFlavor = $(this).val();

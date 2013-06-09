@@ -4,8 +4,8 @@ var requestSass; // variable to hold request
 function compileSass() {
     var sassCode = editorSass.getSession().getValue();
 
-    var sassFlavor = $('#sass-flavor :selected').prop('value');
-    var cssFlavor = $('#css-flavor :selected').prop('value');
+    var sassFlavor = $('#sass-flavor').val();
+    var cssFlavor = $('#css-flavor').val();
     var css = null;
 
     // abort any pending requestSass

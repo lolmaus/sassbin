@@ -18,7 +18,7 @@ function loadGist(gistId) {
             var config;
 
             $.each(gistFiles, function(key, val) {
-                if (/.htm(l)?$/i.test(val.filename))
+                if (/.(haml|(htm(l)?))$/i.test(val.filename))
                     editorHtml.getSession().setValue(val.content);
                 else if (/.s(a|c)ss$/i.test(val.filename)) {
                     editorSass.getSession().setValue(val.content);
