@@ -9,7 +9,7 @@ function saveGist() {
     var htmlFilename = "structure." + $('#html-flavor').val();
 
     var data = {
-        "description": "Created with SassBin",
+        "description": "Created with http://SassBin.com",
         "public": true,
         "files": {}
     }
