@@ -21,18 +21,24 @@ function loadGist(gistId) {
                 if (/.(haml|(htm(l)?))$/i.test(val.filename)) {
                     editorHtml.getSession().setValue(val.content);
 
-                    if (/.haml$/i.test(val.filename))
+                    if (/.haml$/i.test(val.filename)) {
                         editorSass.getSession().setMode("ace/mode/haml");
-                    else if (/.htm(l)?$/i.test(val.filename))
+                        $('#html-flavor').val("haml");
+                    } else if (/.htm(l)?$/i.test(val.filename)) {
                         editorSass.getSession().setMode("ace/mode/html");
+                        $('#html-flavor').val("html");
+                    }
                 }
                 else if (/.s(a|c)ss$/i.test(val.filename)) {
                     editorSass.getSession().setValue(val.content);
 
-                    if (/.scss$/i.test(val.filename))
+                    if (/.scss$/i.test(val.filename)) {
                         editorSass.getSession().setMode("ace/mode/scss");
-                    else if (/.sass$/i.test(val.filename))
+                        $('#sass-flavor').val("scss");
+                    } else if (/.sass$/i.test(val.filename)) {
                         editorSass.getSession().setMode("ace/mode/sass");
+                        $('#sass-flavor').val("sass");
+                    }
                 } else if (val.filename == '~sassbin-config.json')
                     config = val.content;
             });

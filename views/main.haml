@@ -3,8 +3,8 @@
   %header
     %h2
       %select#html-flavor.flavor
-        %option{value:'html', selected: @html_flavor == 'html'} HTML
-        %option{value:'haml', selected: @html_flavor == 'haml'} HAML
+        %option{value:'haml', selected: true} HAML
+        %option{value:'html'} HTML
       body
     .pane-settings
       %label
@@ -18,8 +18,8 @@
   %header
     %h2
       %select#sass-flavor.flavor
-        %option{value:'sass', selected: @sass_flavor == 'sass'} SASS
-        %option{value:'scss', selected: @sass_flavor == 'scss'} SCSS
+        %option{value:'sass', selected: true} SASS
+        %option{value:'scss'} SCSS
     .pane-settings
       %label
         %input.checkbox-wrap#checkbox-wrap-sass{type: 'checkbox', name: 'sass', checked: true}
@@ -33,10 +33,10 @@
     %h2
       Compiled CSS
       %select#css-flavor.flavor
-        %option{value:'expanded', selected: @css_flavor == 'expanded'} Expanded
-        %option{value:'nested', selected: @css_flavor == 'nested'} Nested
-        %option{value:'compact', selected: @css_flavor == 'compact'} Compact
-        %option{value:'compressed', selected: @css_flavor == 'compressed'} Compressed
+        %option{value:'expanded', selected: true} Expanded
+        %option{value:'nested'} Nested
+        %option{value:'compact'} Compact
+        %option{value:'compressed'} Compressed
     .pane-settings
       %label
         %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
