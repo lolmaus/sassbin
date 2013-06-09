@@ -82,14 +82,22 @@ class App < Sinatra::Base
   register Sinatra::AssetPack
   assets do
     css :app,  ['/css/*.css']
-    js :app,    ['/js/app/**/*.js', '/js/app/*.js']
-    css :vendor, ['/js/vendor/*.css']
-    js :vendor, ['/js/vendor/jquery-2.0.2.min.js',
+    #js :app,    ['/js/app/**/*.js', '/js/app/*.js']
+    #js :vendor, ['/js/vendor/jquery-2.0.2.min.js',
+    #             '/js/vendor/jquery-ui-1.10.3.custom.min.js',
+    #             '/js/vendor/underscore-min.js',
+    #             '/js/vendor/underscore.string.min.js',
+    #             '/js/vendor/haml.min.js',
+    #             '/js/vendor/ace.js']
+
+    js :app,    ['/js/vendor/jquery-2.0.2.min.js',
                  '/js/vendor/jquery-ui-1.10.3.custom.min.js',
                  '/js/vendor/underscore-min.js',
                  '/js/vendor/underscore.string.min.js',
                  '/js/vendor/haml.min.js',
-                 '/js/vendor/ace.js']
+                 '/js/vendor/ace.js',
+                 '/js/app/**/*.js',
+                 '/js/app/*.js']
   end
 
   # Allowing vanilla SASS use Compass extensions

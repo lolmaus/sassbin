@@ -2,10 +2,11 @@
 %html
   %head
     %title SassBin, the HTML/SASS playground
-    = haml :'partials/assets-top'
+    -#= haml :'partials/assets-top'
   %body
     %header#header
       = haml :'partials/toolbar'
     #main
       = haml :main
+    = css :app
     = js :app
