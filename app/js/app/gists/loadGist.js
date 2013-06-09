@@ -18,8 +18,14 @@ function loadGist(gistId) {
             var config;
 
             $.each(gistFiles, function(key, val) {
-                if (/.(haml|(htm(l)?))$/i.test(val.filename))
+                if (/.(haml|(htm(l)?))$/i.test(val.filename)) {
                     editorHtml.getSession().setValue(val.content);
+
+                    if (/.haml$/i.test(val.filename))
+                        editorSass.getSession().setMode("ace/mode/haml");
+                    else if (/.htm(l)?$/i.test(val.filename))
+                        editorSass.getSession().setMode("ace/mode/html");
+                }
                 else if (/.s(a|c)ss$/i.test(val.filename)) {
                     editorSass.getSession().setValue(val.content);
 
