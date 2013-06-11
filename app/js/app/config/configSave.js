@@ -32,7 +32,6 @@ function configSave() {
     });
 
     config['css-flavor'] = $('#css-flavor').val();
-    config['html-flavor'] = $('#html-flavor').val();
 
     return config;
 }
