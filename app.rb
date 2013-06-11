@@ -82,7 +82,9 @@ class App < Sinatra::Base
   register Sinatra::AssetPack
   assets do
     css :app,  ['/css/*.css']
-    js :app,    ['/js/app/**/*.js', '/js/app/*.js']
+    js :app,   ['/js/vendor/*.js',
+                '/js/app/**/*.js',
+                '/js/app/*.js']
   end
 
   # Allowing vanilla SASS use Compass extensions

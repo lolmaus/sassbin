@@ -51,6 +51,7 @@ function loadGist(gistId) {
             statusBar();
             appStatusSaved(gistId, gistUrl);
             window.history.pushState(response, "Gist " + gistId, "/gist/" + gistId + "/");
+            GoogleAnalyticsTrackThisPage();
         });
 
         // callback handler that will be called on failure

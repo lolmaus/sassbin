@@ -31,6 +31,7 @@ function saveGist() {
             gistId = e.id;
             gistUrl = e.html_url;
             window.history.pushState(data, "Gist " + gistId, "/gist/" + gistId + "/");
+            GoogleAnalyticsTrackThisPage();
             appStatusSaved(gistId, gistUrl);
             statusBar();
         })
