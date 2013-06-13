@@ -35,7 +35,7 @@ Tested on Windows and Ubuntu Linux.
     
 You can use Thin and Nginx in production. Here are config file examples, adjust as necessary:
 
-`sassbin_thin_config.yml`:
+### sassbin_thin_config.yml
 
     ---
         environment: production
@@ -54,7 +54,7 @@ You can use Thin and Nginx in production. Here are config file examples, adjust 
         daemonize: true
 
 
-`sassbin_nginx_config.conf`:
+### sassbin_nginx_config.conf:
 
     upstream sassbin_thin {
         server 127.0.0.1:3000;
