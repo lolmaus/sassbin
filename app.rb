@@ -31,7 +31,7 @@ require 'stipe'
 require 'susy'
 require 'toolkit'
 require 'zen-grids'
-
+require 'zurb-foundation'
 
 Encoding.default_external = 'utf-8'  if defined?(::Encoding)
 
