@@ -6,6 +6,7 @@ require 'sinatra/reloader' #if ( (ENV['RACK_ENV'] != :development) or (ENV['RACK
 require 'sinatra/assetpack'
 require 'compass'
 require 'sinatra/support'
+require 'timeout'
 
 # Compass extensions
 
@@ -104,19 +105,23 @@ class App < Sinatra::Base
 
   post '/compile-sass' do
     sass_code = params[:sass_code]
+    return unless sass_code
+
     sass_flavor = params[:sass_flavor]
     css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
 
     Sass.logger.clean!
 
     begin
+      timeout_seconds = 10
+
       if sass_flavor == 'sass'
-        #output = sass(sass_code.chomp, {style: css_flavor, cache: false})
-        output = Tilt::SassTemplate.new('SASS code', {style: css_flavor, cache: false}) { sass_code }.render
+        template = Tilt::SassTemplate.new('SASS code', {style: css_flavor, cache: false}) { sass_code }
       else
-        #output = scss(sass_code.chomp, {style: css_flavor, cache: false})
-        output = Tilt::ScssTemplate.new('SCSS code', {style: css_flavor, cache: false}) { sass_code }.render
+        template = Tilt::ScssTemplate.new('SCSS code', {style: css_flavor, cache: false}) { sass_code }
       end
+
+      output = Timeout::timeout(timeout_seconds) { template.render }
 
       if !Sass.logger.messages.empty? then output.prepend Sass.logger.messages << "\n\n" end
 
@@ -124,7 +129,12 @@ class App < Sinatra::Base
     rescue Sass::SyntaxError => e
       status 200
       e.to_s.lines.first
-    end if sass_code
+    rescue Timeout::Error
+      status 200
+      "/* SASS compilation time exceeded #{timeout_seconds} seconds and was terminated." +
+          "\n *" +
+          "\n * Please make your SASS logic less complicated. */"
+    end
   end
 end
 
