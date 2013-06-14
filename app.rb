@@ -109,12 +109,10 @@ class App < Sinatra::Base
 
     sass_flavor = params[:sass_flavor]
     css_flavor = ['compressed', 'compact', 'nested', 'expanded'].include?(params[:css_flavor]) ? params[:css_flavor].to_sym : :nested
-
     Sass.logger.clean!
+    timeout_seconds = 10
 
     begin
-      timeout_seconds = 10
-
       if sass_flavor == 'sass'
         template = Tilt::SassTemplate.new('SASS code', {style: css_flavor, cache: false}) { sass_code }
       else
