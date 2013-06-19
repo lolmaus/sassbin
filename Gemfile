@@ -19,7 +19,7 @@ gem 'bourbon-compass'
 gem 'breakpoint'
 gem 'breakpoint-slicer'
 gem 'color-schemer'
-gem 'css-lightbox'
+gem 'css-lightbox' ~> 0.3.beta
 gem 'css-slideshow'
 gem 'fancy-buttons'
 gem 'fittext'
