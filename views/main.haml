@@ -1,35 +1,39 @@
 -##pane-container
 %section#pane-html.pane.is-active
   %header
+    .pane-settings
+      %label
+        %input.checkbox-wrap#checkbox-wrap-html{type: 'checkbox', name: 'html', checked: true}
+        %span Wrap
     %h2
       %select#html-flavor.flavor
         %option{value:'haml', selected: true} HAML
         %option{value:'html'} HTML
       body
-    .pane-settings
-      %label
-        %input.checkbox-wrap#checkbox-wrap-html{type: 'checkbox', name: 'html', checked: true}
-        %span Wrap
   #editor-html.editor
   %textarea#editor-html-stunt-double{style: 'display: none;'}= @html
 
 
 %section#pane-sass.pane.is-active
   %header
-    %h2
-      %select#sass-flavor.flavor
-        %option{value:'sass', selected: true} SASS
-        %option{value:'scss'} SCSS
     .pane-settings
       %label
         %input.checkbox-wrap#checkbox-wrap-sass{type: 'checkbox', name: 'sass', checked: true}
         %span Wrap
+    %h2
+      %select#sass-flavor.flavor
+        %option{value:'sass', selected: true} SASS
+        %option{value:'scss'} SCSS
   -##editor-sass.editor= flatten @sass
   #editor-sass.editor= flatten @sass
 
 
 %section#pane-css.pane.is-active
   %header
+    .pane-settings
+      %label
+        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
+        %span Wrap
     %h2
       Compiled CSS
       %select#css-flavor.flavor
@@ -37,10 +41,6 @@
         %option{value:'nested'} Nested
         %option{value:'compact'} Compact
         %option{value:'compressed'} Compressed
-    .pane-settings
-      %label
-        %input.checkbox-wrap#checkbox-wrap-css{type: 'checkbox', name: 'css', checked: true}
-        %span Wrap
   #editor-css.editor
 
 
