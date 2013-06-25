@@ -63,6 +63,7 @@ class App < Sinatra::Base
   enable  :raise_exceptions
 
   set :root, File.dirname(__FILE__)
+  set :public_folder, Proc.new { File.join(root, "public") }
 
   # This is a convenient way of setting up Compass in a Sinatra
   # project without mucking around with load paths and such.
@@ -134,6 +135,10 @@ class App < Sinatra::Base
           "\n *" +
           "\n * Please make your SASS logic less complicated. */"
     end
+  end
+
+  get '/robots.txt' do
+    send_file File.join(settings.public_folder, 'robots.txt')
   end
 end
 
