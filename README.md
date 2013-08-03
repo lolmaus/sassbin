@@ -52,6 +52,8 @@ You can use Thin and Nginx in production. Here are config file examples, adjust 
         timeout: 30
         max_persistent_conns: 512
         daemonize: true
+        
+Use `thin start -C sassbin_thin_config.yml` to start thin manually or set it up to run as a daemon.
 
 
 ### sassbin_nginx_config.conf:
