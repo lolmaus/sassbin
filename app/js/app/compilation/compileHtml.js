@@ -9,8 +9,14 @@ function compileHtml() {
     var htmlFlavor = $('#html-flavor').val();
 
     if (htmlFlavor == 'haml') {
+      try {
         hamlFn = haml.compileHaml({source: html});
         html = hamlFn();
+//        html = Haml.render(html);
+      }
+      catch (e) {
+        html = e;
+      }
     }
 
     if(style.length == 0){
